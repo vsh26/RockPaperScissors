@@ -4,12 +4,6 @@ const scissorsButton = document.querySelector('.js-scissors-btn');
 const displayText = document.querySelector('.js-display-score');
 const resetButton = document.querySelector('.js-reset-button');
 
-let score = {
-    wins : 0,
-    losses : 0,
-    ties: 0
-}
-
 rockButton.addEventListener('click', (event) => {
     // console.log(event);
     play('Rock');
@@ -51,11 +45,11 @@ function play(userMove){
         }
     }
 
-    console.log(userMove);
-    console.log(computerMove);
-    
-    
-    console.log(result);
+    displayScore(userMove, computerMove, result);
+
+    // console.log(userMove);
+    // console.log(computerMove);
+    // console.log(result);
 }
 
 function pickComputerMove(){
@@ -74,6 +68,7 @@ function pickComputerMove(){
     return computerMove;
 }
 
-function reset(){
-
+function displayScore(userMove, computerMove, result){
+    displayText.innerText = `Your move: ${userMove}, Computer move: ${computerMove}
+    Result: ${result}`;
 }
