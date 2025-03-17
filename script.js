@@ -2,7 +2,13 @@ const rockButton = document.querySelector('.js-rock-btn');
 const paperButton = document.querySelector('.js-paper-btn');
 const scissorsButton = document.querySelector('.js-scissors-btn');
 const displayText = document.querySelector('.js-display-score');
-const resetButton = document.querySelector('.js-reset-button');
+const resetButton = document.querySelector('.js-reset-btn');
+
+const score = {
+    wins : 0,
+    losses : 0,
+    ties: 0
+}
 
 rockButton.addEventListener('click', (event) => {
     // console.log(event);
@@ -17,30 +23,41 @@ scissorsButton.addEventListener('click', (event) => {
     play('Scissors');
 });
 
+resetButton.addEventListener('click', () => {
+    resetScore();
+});
+
 function play(userMove){
     let result = '';
     const computerMove = pickComputerMove();
 
     if(userMove === computerMove){
         result = 'Tie';
+        score.ties += 1;
     }else{
         if(userMove === 'Rock'){
             if(computerMove === 'Paper'){
                 result = 'You Lose!';
+                score.losses += 1;
             }else{
                 result = 'You Win!';
+                score.wins += 1;
             }
         }else if(userMove === 'Paper'){
             if(computerMove === 'Rock'){
                 result = 'You Win!';
+                score.wins += 1;
             }else{
                 result = 'You Lose!';
+                score.losses += 1;
             }
         }else{
             if(computerMove === 'Rock'){
                 result = 'You Lose!';
+                score.losses += 1;
             }else{
                 result = 'You Win!';
+                score.wins += 1;
             }
         }
     }
@@ -70,5 +87,19 @@ function pickComputerMove(){
 
 function displayScore(userMove, computerMove, result){
     displayText.innerText = `Your move: ${userMove}, Computer move: ${computerMove}
-    Result: ${result}`;
+    Result: ${result}
+    Score - Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
+}
+
+function resetScore(){
+    score.wins = 0;
+    score.losses = 0;
+    score.ties = 0;
+
+    displayResetScore();
+}
+
+function displayResetScore(){
+    displayText.innerText = `Score reset successful!
+    Score - Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
 }
