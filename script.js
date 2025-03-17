@@ -1,7 +1,11 @@
 const rockButton = document.querySelector('.js-rock-btn');
 const paperButton = document.querySelector('.js-paper-btn');
 const scissorsButton = document.querySelector('.js-scissors-btn');
-const displayText = document.querySelector('.js-display-score');
+
+const displayMovesElement = document.querySelector('.js-display-moves');
+const displayResultElement = document.querySelector('.js-display-result')
+const displayScoreElement = document.querySelector('.js-display-score');
+
 const resetButton = document.querySelector('.js-reset-btn');
 
 
@@ -14,21 +18,21 @@ const score =  storedScore || {
 }
 
 if(storedScore){
-    displayText.innerText = `
+    displayScoreElement.innerText = `
     Score - Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
 }
 
 rockButton.addEventListener('click', (event) => {
     // console.log(event);
-    play('Rock');
+    play('rock');
 });
 
 paperButton.addEventListener('click', (event) => {
-    play('Paper');
+    play('paper');
 });
 
 scissorsButton.addEventListener('click', (event) => {
-    play('Scissors');
+    play('scissors');
 });
 
 resetButton.addEventListener('click', () => {
@@ -43,16 +47,16 @@ function play(userMove){
         result = 'Tie';
         score.ties += 1;
     }else{
-        if(userMove === 'Rock'){
-            if(computerMove === 'Paper'){
+        if(userMove === 'rock'){
+            if(computerMove === 'paper'){
                 result = 'You Lose!';
                 score.losses += 1;
             }else{
                 result = 'You Win!';
                 score.wins += 1;
             }
-        }else if(userMove === 'Paper'){
-            if(computerMove === 'Rock'){
+        }else if(userMove === 'paper'){
+            if(computerMove === 'rock'){
                 result = 'You Win!';
                 score.wins += 1;
             }else{
@@ -60,7 +64,7 @@ function play(userMove){
                 score.losses += 1;
             }
         }else{
-            if(computerMove === 'Rock'){
+            if(computerMove === 'rock'){
                 result = 'You Lose!';
                 score.losses += 1;
             }else{
@@ -85,20 +89,25 @@ function pickComputerMove(){
     const randomNum = Math.random();
 
     if(randomNum >= 0 && randomNum < 1/3){
-        computerMove = 'Rock';
+        computerMove = 'rock';
     }else if(randomNum >= 1/3 && randomNum < 2/3){
-        computerMove = 'Paper';
+        computerMove = 'paper';
     }else{
-        computerMove = 'Scissors';
+        computerMove = 'scissors';
     }
 
     return computerMove;
 }
 
 function displayScore(userMove, computerMove, result){
-    displayText.innerText = `Your move: ${userMove}, Computer move: ${computerMove}
-    Result: ${result}
-    Score - Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
+
+    displayMovesElement.innerHTML = ` You:
+            <img src="images/${userMove}-emoji.png" class="move-img">
+            Computer:
+            <img src="images/${computerMove}-emoji.png" class="move-img">`;
+    displayResultElement.innerText = `Result: ${result}`;
+    displayScoreElement.innerText = `Score - Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
+
 }
 
 function resetScore(){
@@ -111,6 +120,8 @@ function resetScore(){
 }
 
 function displayResetScore(){
-    displayText.innerText = `Score reset successful!
+    displayMovesElement.innerText = '';
+    displayResultElement.innerText = '';
+    displayScoreElement.innerText = `Score reset successful!
     Score - Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
 }

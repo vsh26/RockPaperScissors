@@ -7,16 +7,34 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <p>Rock Paper Scissors</p>
-    <button class="js-rock-btn rock-btn">Rock</button>
 
-    <button class="js-paper-btn paper-btn">Paper</button>
+    <div class="container">
+
+        <p class="title">Rock Paper Scissors</p>
+        
+        <button class="js-rock-btn move-btn">
+            <img class="move-img" src="images/rock-emoji.png" alt="">
+        </button>
     
-    <button class="js-scissors-btn scissors-btn">Scissors</button>
-
-    <p class="js-display-score display-score"></p>
-
-    <button class="js-reset-btn reset-btn">Reset Score</button>
+        <button class="js-paper-btn move-btn">
+            <img class="move-img" src="images/paper-emoji.png" alt="">
+        </button>
+        
+        <button class="js-scissors-btn move-btn">
+            <img class="move-img" src="images/scissors-emoji.png" alt="">
+        </button>
+        
+        <p class="js-display-moves display-moves">
+            <!-- You:
+            <img src="" alt="">
+            Computer:
+            <img src="" alt=""> -->
+        </p>
+        <p class="js-display-result display-result"></p>
+        <p class="js-display-score display-score"></p>
+    
+        <button class="js-reset-btn reset-btn">Reset Score</button>
+    </div>
 
     <script src="script.js"></script>
 </body>
