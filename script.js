@@ -4,10 +4,18 @@ const scissorsButton = document.querySelector('.js-scissors-btn');
 const displayText = document.querySelector('.js-display-score');
 const resetButton = document.querySelector('.js-reset-btn');
 
-const score = {
+
+const storedScore = JSON.parse(localStorage.getItem('score'));
+
+const score =  storedScore || {
     wins : 0,
     losses : 0,
     ties: 0
+}
+
+if(storedScore){
+    displayText.innerText = `
+    Score - Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
 }
 
 rockButton.addEventListener('click', (event) => {
@@ -62,6 +70,8 @@ function play(userMove){
         }
     }
 
+    localStorage.setItem('score', JSON.stringify(score));
+
     displayScore(userMove, computerMove, result);
 
     // console.log(userMove);
@@ -96,6 +106,7 @@ function resetScore(){
     score.losses = 0;
     score.ties = 0;
 
+    localStorage.setItem('score', JSON.stringify(score));
     displayResetScore();
 }
 
