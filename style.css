@@ -17,6 +17,10 @@ p{
     color: white;
 }
 
+button{
+    cursor: pointer;
+}
+
 .container{
     min-width: 600px;
     padding: 10px;
